@@ -1,9 +1,10 @@
-#!name=阿里云盘 净化/解锁SVIP
-#!desc=非一次性解锁，每次解锁需打开脚本,脚本作者：chxm1023
+#!name=阿里云盘
+#!desc=解锁部分会员功能,自动签到
 #!system=ios
 
 [Script]
-阿里云盘 = type=http-response,requires-body=1,timeout=10,pattern=^https?:\/\/(api|member)\.(aliyundrive|alipan)\.com\/(.+\/(users|activity|user\/get)|((business|apps)\/.+\/users|adrive\/.+\/user)),script-path=https://raw.githubusercontent.com/chxm1023/Rewrite/main/alidrive.js
-
+阿里云盘解锁 = type=http-response,requires-body=1,timeout=10,pattern=^https?:\/\/(api|member)\.(aliyundrive|alipan)\.com\/(.+\/(users|activity|user\/get)|((business|apps)\/.+\/users|adrive\/.+\/user)),script-path=https://raw.githubusercontent.com/chxm1023/Rewrite/main/alidrive.js
+阿里云盘签到Cookie = requires-body=1,type=http-response,pattern=https:\/\/auth.(aliyundrive|alipan).com\/v2\/account\/token,script-path=https://raw.githubusercontent.com/lowking/Scripts/master/ali/aliYunPanCheckIn.js
+阿里云盘签到 = type=cron,cronexp="0 10 10 * * ?",wake-system=1,script-path=https://raw.githubusercontent.com/lowking/Scripts/master/ali/aliYunPanCheckIn.js
 [MITM]
 hostname = %APPEND% *.aliyundrive.com, *.alipan.com
